@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <tree :tree-data="file_structure"></tree>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import Tree from './components/Tree';
+  import dataJson from '../public/static/node_modules.json'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    data: () => ({
+      file_structure: dataJson
+    }),
+    components: {
+      Tree,
+    },
+  };
 </script>
 
 <style>
