@@ -1,8 +1,13 @@
 <template>
   <div>
-    <i v-if="node.type === 'file'" class="bi bi-file-text"></i>
-    <i v-if="node.type === 'link'" class="bi bi-link"></i>
-    <span class="label">{{ node.name }}</span>
+    <span
+      class="label"
+      :class="{
+        file__name: node.type == 'file',
+        link__name: node.type == 'link',
+      }"
+      >{{ node.name }}</span
+    >
     <span v-if="node.type === 'link'" class="link"> {{ node.target }}</span>
   </div>
 </template>
@@ -16,14 +21,22 @@
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.file {
+  &__name {
+    user-select: all;
+    cursor: cell;
+  }
+}
+
 .link {
   margin-left: 16px;
   user-select: all;
-  cursor: cell;
-}
+  cursor: pointer;
 
-i {
-  margin-right: 8px;
+  &__name {
+    user-select: all;
+    cursor: cell;
+  }
 }
 </style>

@@ -2,20 +2,10 @@
   <li class="node__tree">
     <div
       class="item"
-      :class="{
-        file__item: node.type == 'file',
-        link__item: node.type == 'link',
-      }"
     >
-      <button
-        v-if="node.contents && node.contents.length"
-        class="folder__button"
-        @click="isExpanded = !isExpanded"
-      >
-        <i v-if="!isExpanded" class="bi bi-folder-fill"></i>
-        <i v-else class="bi bi-folder2-open"></i>
-      </button>
-     
+      <i class="icon" 
+      @click="expand" 
+      :class="iconType"></i>
       <node-item :node="node" />
     </div>
     <div v-if="isExpanded" class="contents">
@@ -23,7 +13,7 @@
         <directory
           v-for="(child, i) in node.contents"
           :node="child"
-          :key="i"
+          :key="node.name + i"
           class="child"
         ></directory>
       </ul>
@@ -42,6 +32,23 @@ import NodeItem from "./NodeItem.vue"
     data: () => ({
       isExpanded: false
     }),
+    computed: {
+      iconType: function () {
+        return {
+          'bi bi-folder-fill icon__folder': this.node.type === 'directory' && !this.isExpanded,
+          'bi bi-folder2-open icon__folder': this.node.type === 'directory' && this.isExpanded,
+          'bi bi-file-text': this.node.type === 'file',
+          'bi bi-link': this.node.type === 'link'
+        }
+      },
+    },
+    methods: {
+      expand() {
+        if (this.node.type === 'directory') {
+          this.isExpanded = !this.isExpanded
+        }
+      }
+    },
     components:{
       NodeItem,
     }
@@ -55,22 +62,20 @@ import NodeItem from "./NodeItem.vue"
   margin-left: 8px;
 }
 
-.folder {
-  &__button {
-  margin-right: 18px;
-  border: none;
-  background: transparent;
+.icon {
+  margin-right: 8px;
+  &__folder {
+    cursor: pointer;
   }
 }
 
-ul li {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-li {
-  margin-top: 2px;
+.node {
+  &__tree {
+    margin-top: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 .contents {
@@ -84,12 +89,5 @@ li {
 
 .child {
   margin-left: 8px;
-}
-
-.file {
-  &__item {
-  user-select: all;
-  cursor: cell;
-  }
 }
 </style>
