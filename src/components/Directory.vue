@@ -55,10 +55,12 @@ import NodeItem from "./NodeItem.vue"
   margin-left: 8px;
 }
 
-.folder__button {
+.folder {
+  &__button {
   margin-right: 18px;
   border: none;
   background: transparent;
+  }
 }
 
 ul li {
@@ -74,7 +76,6 @@ li {
 .contents {
   display: flex;
 
-
   &__list {
     display: flex;
     flex-direction: column;
@@ -85,8 +86,10 @@ li {
   margin-left: 8px;
 }
 
-.file__item {
+.file {
+  &__item {
   user-select: all;
   cursor: cell;
+  }
 }
 </style>
