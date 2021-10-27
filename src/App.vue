@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <span>
+    Переход к следующей папке - tab
+    <br/>
+    Переход к предыдущей папке - shift + tab
+    <br/>
+    Открытие и закрытие папки - space
+    </span>
     <tree :tree-data="file_structure"></tree>
   </div>
 </template>

@@ -2,7 +2,7 @@
 <template>
   <div class="tree">
     <ul class="tree__list">
-      <directory :node="treeData"></directory>
+      <directory :node="treeData" hasFocus></directory>
     </ul>
   </div>
 </template>
